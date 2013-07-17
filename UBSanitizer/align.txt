@@ -1,0 +1,5 @@
+align.cc:9:20: runtime error: load of misaligned address 0x00000209a011 for type 'int', which requires 4 byte alignment
+0x00000209a011: note: pointer points here
+ 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  51 00 00 00 00
+              ^ 
+00000000

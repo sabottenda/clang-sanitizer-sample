@@ -1,0 +1,87 @@
+==28950==WARNING: Program is run with unlimited stack size, which wouldn't work with ThreadSanitizer.
+==28950==Re-execing with stack size limited to 33554432 bytes.
+==================
+WARNING: ThreadSanitizer: data race (pid=28950)
+  Write of size 8 at 0x7d100000dfc8 by thread T1:
+    #0 operator delete(void*) ??:0 (exe+0x0000000253ec)
+    #1 __gnu_cxx::new_allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, (__gnu_cxx::_Lock_policy)2> >::deallocate(std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, (__gnu_cxx::_Lock_policy)2>*, unsigned long) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/ext/new_allocator.h:100 (exe+0x0000000576f5)
+    #2 std::allocator_traits<std::allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, (__gnu_cxx::_Lock_policy)2> > >::deallocate(std::allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, (__gnu_cxx::_Lock_policy)2> >&, std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, (__gnu_cxx::_Lock_policy)2>*, unsigned long) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/alloc_traits.h:379 (exe+0x0000000576b5)
+    #3 std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, (__gnu_cxx::_Lock_policy)2>::_M_destroy() /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:420 (exe+0x00000005790e)
+    #4 <null> <null>:0 (libstdc++.so.6+0x0000000b2a4a)
+
+  Previous atomic write of size 4 at 0x7d100000dfc8 by main thread:
+    #0 __tsan_atomic32_fetch_add ??:0 (exe+0x00000003c9c7)
+    #1 __gnu_cxx::__exchange_and_add(int volatile*, int) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/ext/atomicity.h:48 (exe+0x000000056a32)
+    #2 __gnu_cxx::__exchange_and_add_dispatch(int*, int) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/ext/atomicity.h:81 (exe+0x0000000569ef)
+    #3 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:144 (exe+0x000000057d46)
+    #4 ~__shared_count /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:558 (exe+0x000000057d22)
+    #5 ~__shared_count /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:556 (exe+0x000000057cf5)
+    #6 ~__shared_ptr /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:813 (exe+0x000000057de9)
+    #7 ~shared_ptr /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr.h:93 (exe+0x000000057dc5)
+    #8 ~shared_ptr /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr.h:93 (exe+0x000000057cd5)
+    #9 thread<<lambda at race_cpp11.cc:4:18>, > /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/thread:134 (exe+0x000000057354)
+    #10 main /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_cpp11.cc:4 (exe+0x000000056868)
+
+  Location is heap block of size 56 at 0x7d100000dfc0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x000000024f56)
+    #1 __gnu_cxx::new_allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, (__gnu_cxx::_Lock_policy)2> >::allocate(unsigned long, void const*) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/ext/new_allocator.h:94 (exe+0x000000057b74)
+    #2 std::allocator_traits<std::allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, (__gnu_cxx::_Lock_policy)2> > >::allocate(std::allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, (__gnu_cxx::_Lock_policy)2> >&, unsigned long) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/alloc_traits.h:353 (exe+0x00000005760f)
+    #3 std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, std::_Bind_simple<main::$_0 ()> >(std::_Sp_make_shared_tag, std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >*, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > > const&, std::_Bind_simple<main::$_0 ()>&&) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:522 (exe+0x0000000575b2)
+    #4 __shared_ptr<std::allocator<std::thread::_Impl<std::_Bind_simple<<lambda at race_cpp11.cc:4:18> ()> > >, std::_Bind_simple<<lambda at race_cpp11.cc:4:18> ()> > /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:997 (exe+0x000000057550)
+    #5 shared_ptr<std::allocator<std::thread::_Impl<std::_Bind_simple<<lambda at race_cpp11.cc:4:18> ()> > >, std::_Bind_simple<<lambda at race_cpp11.cc:4:18> ()> > /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr.h:317 (exe+0x0000000574fd)
+    #6 std::shared_ptr<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > > std::allocate_shared<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > >, std::_Bind_simple<main::$_0 ()> >(std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > > const&, std::_Bind_simple<main::$_0 ()>&&) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr.h:599 (exe+0x00000005749d)
+    #7 std::shared_ptr<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > > std::make_shared<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> >, std::_Bind_simple<main::$_0 ()> >(std::_Bind_simple<main::$_0 ()>&&) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr.h:615 (exe+0x00000005742a)
+    #8 std::shared_ptr<std::thread::_Impl<std::_Bind_simple<main::$_0 ()> > > std::thread::_M_make_routine<std::_Bind_simple<main::$_0 ()> >(std::_Bind_simple<main::$_0 ()>&&) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/thread:191 (exe+0x0000000573b6)
+    #9 thread<<lambda at race_cpp11.cc:4:18>, > /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/thread:134 (exe+0x00000005732f)
+    #10 main /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_cpp11.cc:4 (exe+0x000000056868)
+
+  Thread T1 (tid=28952, running) created by main thread at:
+    #0 pthread_create ??:0 (exe+0x000000027cb2)
+    #1 <null> <null>:0 (libstdc++.so.6+0x0000000b2907)
+    #2 main /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_cpp11.cc:4 (exe+0x000000056868)
+
+SUMMARY: ThreadSanitizer: data race ??:0 operator delete(void*)
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=28950)
+  Write of size 8 at 0x7d100000df88 by thread T2:
+    #0 operator delete(void*) ??:0 (exe+0x0000000253ec)
+    #1 __gnu_cxx::new_allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, (__gnu_cxx::_Lock_policy)2> >::deallocate(std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, (__gnu_cxx::_Lock_policy)2>*, unsigned long) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/ext/new_allocator.h:100 (exe+0x000000056da5)
+    #2 std::allocator_traits<std::allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, (__gnu_cxx::_Lock_policy)2> > >::deallocate(std::allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, (__gnu_cxx::_Lock_policy)2> >&, std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, (__gnu_cxx::_Lock_policy)2>*, unsigned long) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/alloc_traits.h:379 (exe+0x000000056d65)
+    #3 std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, (__gnu_cxx::_Lock_policy)2>::_M_destroy() /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:420 (exe+0x000000056fbe)
+    #4 <null> <null>:0 (libstdc++.so.6+0x0000000b2a4a)
+
+  Previous atomic write of size 4 at 0x7d100000df88 by main thread:
+    #0 __tsan_atomic32_fetch_add ??:0 (exe+0x00000003c9c7)
+    #1 __gnu_cxx::__exchange_and_add(int volatile*, int) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/ext/atomicity.h:48 (exe+0x000000056a32)
+    #2 __gnu_cxx::__exchange_and_add_dispatch(int*, int) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/ext/atomicity.h:81 (exe+0x0000000569ef)
+    #3 std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release() /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:144 (exe+0x000000057d46)
+    #4 ~__shared_count /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:558 (exe+0x000000057d22)
+    #5 ~__shared_count /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:556 (exe+0x000000057cf5)
+    #6 ~__shared_ptr /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:813 (exe+0x000000057de9)
+    #7 ~shared_ptr /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr.h:93 (exe+0x000000057dc5)
+    #8 ~shared_ptr /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr.h:93 (exe+0x000000057cd5)
+    #9 thread<<lambda at race_cpp11.cc:5:18>, > /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/thread:134 (exe+0x000000056924)
+    #10 main /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_cpp11.cc:5 (exe+0x000000056871)
+
+  Location is heap block of size 56 at 0x7d100000df80 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x000000024f56)
+    #1 __gnu_cxx::new_allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, (__gnu_cxx::_Lock_policy)2> >::allocate(unsigned long, void const*) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/ext/new_allocator.h:94 (exe+0x000000057224)
+    #2 std::allocator_traits<std::allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, (__gnu_cxx::_Lock_policy)2> > >::allocate(std::allocator<std::_Sp_counted_ptr_inplace<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, (__gnu_cxx::_Lock_policy)2> >&, unsigned long) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/alloc_traits.h:353 (exe+0x000000056cbf)
+    #3 std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, std::_Bind_simple<main::$_1 ()> >(std::_Sp_make_shared_tag, std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >*, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > > const&, std::_Bind_simple<main::$_1 ()>&&) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:522 (exe+0x000000056c62)
+    #4 __shared_ptr<std::allocator<std::thread::_Impl<std::_Bind_simple<<lambda at race_cpp11.cc:5:18> ()> > >, std::_Bind_simple<<lambda at race_cpp11.cc:5:18> ()> > /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr_base.h:997 (exe+0x000000056c00)
+    #5 shared_ptr<std::allocator<std::thread::_Impl<std::_Bind_simple<<lambda at race_cpp11.cc:5:18> ()> > >, std::_Bind_simple<<lambda at race_cpp11.cc:5:18> ()> > /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr.h:317 (exe+0x000000056bad)
+    #6 std::shared_ptr<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > > std::allocate_shared<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > >, std::_Bind_simple<main::$_1 ()> >(std::allocator<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > > const&, std::_Bind_simple<main::$_1 ()>&&) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr.h:599 (exe+0x000000056b4d)
+    #7 std::shared_ptr<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > > std::make_shared<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> >, std::_Bind_simple<main::$_1 ()> >(std::_Bind_simple<main::$_1 ()>&&) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/bits/shared_ptr.h:615 (exe+0x000000056ada)
+    #8 std::shared_ptr<std::thread::_Impl<std::_Bind_simple<main::$_1 ()> > > std::thread::_M_make_routine<std::_Bind_simple<main::$_1 ()> >(std::_Bind_simple<main::$_1 ()>&&) /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/thread:191 (exe+0x000000056986)
+    #9 thread<<lambda at race_cpp11.cc:5:18>, > /usr/lib/gcc/x86_64-linux-gnu/4.7/../../../../include/c++/4.7/thread:134 (exe+0x0000000568ff)
+    #10 main /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_cpp11.cc:5 (exe+0x000000056871)
+
+  Thread T2 (tid=28954, running) created by main thread at:
+    #0 pthread_create ??:0 (exe+0x000000027cb2)
+    #1 <null> <null>:0 (libstdc++.so.6+0x0000000b2907)
+    #2 main /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_cpp11.cc:5 (exe+0x000000056871)
+
+SUMMARY: ThreadSanitizer: data race ??:0 operator delete(void*)
+==================
+ThreadSanitizer: reported 2 warnings

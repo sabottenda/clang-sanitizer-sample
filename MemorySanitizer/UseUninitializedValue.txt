@@ -1,0 +1,9 @@
+==28838== WARNING: Use of uninitialized value
+    #0 0x7f011aedd493 (/home/sabo/clang-sanitizer-sample/MemorySanitizer/UseUninitializedValue+0x25493)
+    #1 0x7f011a0adea4 (/lib/x86_64-linux-gnu/libc.so.6+0x21ea4)
+    #2 0x7f011aedd28c (/home/sabo/clang-sanitizer-sample/MemorySanitizer/UseUninitializedValue+0x2528c)
+  Uninitialized value was created by a heap allocation
+    #0 0x7f011aed5623 (/home/sabo/clang-sanitizer-sample/MemorySanitizer/UseUninitializedValue+0x1d623)
+    #1 0x7f011aedd3bd (/home/sabo/clang-sanitizer-sample/MemorySanitizer/UseUninitializedValue+0x253bd)
+    #2 0x7f011a0adea4 (/lib/x86_64-linux-gnu/libc.so.6+0x21ea4)
+Exiting

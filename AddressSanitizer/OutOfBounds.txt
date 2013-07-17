@@ -1,0 +1,41 @@
+=================================================================
+==28291==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x62100001dd18 at pc 0x42da2e bp 0x7fff48629630 sp 0x7fff48629628
+READ of size 4 at 0x62100001dd18 thread T0
+    #0 0x42da2d (/home/sabo/clang-sanitizer-sample/AddressSanitizer/OutOfBounds+0x42da2d)
+    #1 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+    #2 0x42d34c (/home/sabo/clang-sanitizer-sample/AddressSanitizer/OutOfBounds+0x42d34c)
+0x62100001dd18 is located 24 bytes to the right of 4096-byte region [0x62100001cd00,0x62100001dd00)
+allocated by thread T0 here:
+    #0 0x41f704 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/OutOfBounds+0x41f704)
+    #1 0x42d53a (/home/sabo/clang-sanitizer-sample/AddressSanitizer/OutOfBounds+0x42d53a)
+    #2 0x42d9a6 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/OutOfBounds+0x42d9a6)
+    #3 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+Shadow bytes around the buggy address:
+  0x0c427fffbb50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c427fffbb60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c427fffbb70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c427fffbb80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c427fffbb90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c427fffbba0: fa fa fa[fa]fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c427fffbbb0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c427fffbbc0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c427fffbbd0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c427fffbbe0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c427fffbbf0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:     fa
+  Heap right redzone:    fb
+  Freed heap region:     fd
+  Stack left redzone:    f1
+  Stack mid redzone:     f2
+  Stack right redzone:   f3
+  Stack partial redzone: f4
+  Stack after return:    f5
+  Stack use after scope: f8
+  Global redzone:        f9
+  Global init order:     f6
+  Poisoned by user:      f7
+  ASan internal:         fe
+==28291==ABORTING

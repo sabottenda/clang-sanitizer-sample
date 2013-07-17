@@ -1,0 +1,12 @@
+=================================================================
+==28289==ERROR: AddressSanitizer: alloc-dealloc-mismatch (operator new [] vs operator delete) on 0x60400000dfd0
+    #0 0x41f824 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/InvalidFree+0x41f824)
+    #1 0x42d92c (/home/sabo/clang-sanitizer-sample/AddressSanitizer/InvalidFree+0x42d92c)
+    #2 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+0x60400000dfd0 is located 0 bytes inside of 40-byte region [0x60400000dfd0,0x60400000dff8)
+allocated by thread T0 here:
+    #0 0x41f6d4 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/InvalidFree+0x41f6d4)
+    #1 0x42d5f4 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/InvalidFree+0x42d5f4)
+    #2 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+==28289==HINT: if you don't care about these warnings you may set ASAN_OPTIONS=alloc_dealloc_mismatch=0
+==28289==ABORTING

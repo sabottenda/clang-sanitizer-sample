@@ -1,0 +1,2 @@
+/home/sabo/clang-sanitizer-sample/UBSanitizer/enum:0x40e206: runtime error: load of value 8, which is not a valid value for type 'en'
+8

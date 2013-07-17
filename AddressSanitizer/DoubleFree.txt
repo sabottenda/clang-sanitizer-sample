@@ -1,0 +1,16 @@
+=================================================================
+==28287==ERROR: AddressSanitizer: attempting double-free on 0x60200000eff0 in thread T0:
+    #0 0x41f1d4 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/DoubleFree+0x41f1d4)
+    #1 0x42d7cd (/home/sabo/clang-sanitizer-sample/AddressSanitizer/DoubleFree+0x42d7cd)
+    #2 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+0x60200000eff0 is located 0 bytes inside of 4-byte region [0x60200000eff0,0x60200000eff4)
+freed by thread T0 here:
+    #0 0x41f1d4 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/DoubleFree+0x41f1d4)
+    #1 0x42d559 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/DoubleFree+0x42d559)
+    #2 0x42d79d (/home/sabo/clang-sanitizer-sample/AddressSanitizer/DoubleFree+0x42d79d)
+    #3 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+previously allocated by thread T0 here:
+    #0 0x41f2b4 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/DoubleFree+0x41f2b4)
+    #1 0x42d763 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/DoubleFree+0x42d763)
+    #2 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+==28287==ABORTING

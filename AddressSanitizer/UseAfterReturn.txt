@@ -1,0 +1,43 @@
+=================================================================
+==28295==ERROR: AddressSanitizer: stack-use-after-return on address 0x2aaaadbdf260 at pc 0x42dcf3 bp 0x7fff4ef4f9d0 sp 0x7fff4ef4f9c8
+READ of size 4 at 0x2aaaadbdf260 thread T0
+    #0 0x42dcf2 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterReturn+0x42dcf2)
+    #1 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+    #2 0x42d38c (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterReturn+0x42d38c)
+Address 0x2aaaadbdf260 is located in stack of thread T0 at offset 96 in frame
+    #0 0x42d6ff (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterReturn+0x42d6ff)
+  This frame has 3 object(s):
+    [32, 33) 'f.addr'
+    [96, 100) 'a'
+    [160, 164) 'cleanup.dest.slot'
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism or swapcontext
+      (longjmp and C++ exceptions *are* supported)
+Shadow bytes around the buggy address:
+  0x0555d5b73df0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0555d5b73e00: f1 f1 f1 f1 04 f4 f4 f4 f2 f2 f2 f2 04 f4 f4 f4
+  0x0555d5b73e10: f2 f2 f2 f2 00 f4 f4 f4 f2 f2 f2 f2 00 f4 f4 f4
+  0x0555d5b73e20: f2 f2 f2 f2 00 f4 f4 f4 f2 f2 f2 f2 04 f4 f4 f4
+  0x0555d5b73e30: f3 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0555d5b73e40: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5[f5]f5 f5 f5
+  0x0555d5b73e50: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 00 00 00 00
+  0x0555d5b73e60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0555d5b73e70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0555d5b73e80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0555d5b73e90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:     fa
+  Heap right redzone:    fb
+  Freed heap region:     fd
+  Stack left redzone:    f1
+  Stack mid redzone:     f2
+  Stack right redzone:   f3
+  Stack partial redzone: f4
+  Stack after return:    f5
+  Stack use after scope: f8
+  Global redzone:        f9
+  Global init order:     f6
+  Poisoned by user:      f7
+  ASan internal:         fe
+==28295==ABORTING

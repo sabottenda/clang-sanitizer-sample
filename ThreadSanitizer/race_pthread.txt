@@ -1,0 +1,21 @@
+==28958==WARNING: Program is run with unlimited stack size, which wouldn't work with ThreadSanitizer.
+==28958==Re-execing with stack size limited to 33554432 bytes.
+==================
+WARNING: ThreadSanitizer: data race (pid=28958)
+  Write of size 4 at 0x7f31ea3a3764 by thread T2:
+    #0 Thread2(void*) /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_pthread.cc:10 (exe+0x000000055410)
+
+  Previous write of size 4 at 0x7f31ea3a3764 by thread T1:
+    #0 Thread1(void*) /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_pthread.cc:5 (exe+0x0000000553d0)
+
+  Thread T2 (tid=28961, running) created by main thread at:
+    #0 pthread_create ??:0 (exe+0x000000026812)
+    #1 main /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_pthread.cc:17 (exe+0x000000055470)
+
+  Thread T1 (tid=28960, finished) created by main thread at:
+    #0 pthread_create ??:0 (exe+0x000000026812)
+    #1 main /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_pthread.cc:16 (exe+0x000000055458)
+
+SUMMARY: ThreadSanitizer: data race /home/sabo/clang-sanitizer-sample/ThreadSanitizer/race_pthread.cc:10 Thread2(void*)
+==================
+ThreadSanitizer: reported 1 warnings

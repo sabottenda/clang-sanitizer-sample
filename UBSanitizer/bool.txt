@@ -1,0 +1,2 @@
+/home/sabo/clang-sanitizer-sample/UBSanitizer/bool:0x40e1ca: runtime error: load of value 255, which is not a valid value for type 'bool'
+1

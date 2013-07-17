@@ -1,0 +1,2 @@
+bounds.cc:5:18: runtime error: index 20 out of bounds for type 'int [10]'
+Illegal instruction (core dumped)

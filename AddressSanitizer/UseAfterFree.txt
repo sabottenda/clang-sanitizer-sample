@@ -1,0 +1,44 @@
+=================================================================
+==28293==ERROR: AddressSanitizer: heap-use-after-free on address 0x61400000fe44 at pc 0x42d690 bp 0x7fff52bac790 sp 0x7fff52bac788
+READ of size 4 at 0x61400000fe44 thread T0
+    #0 0x42d68f (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterFree+0x42d68f)
+    #1 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+    #2 0x42d2cc (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterFree+0x42d2cc)
+0x61400000fe44 is located 4 bytes inside of 400-byte region [0x61400000fe40,0x61400000ffd0)
+freed by thread T0 here:
+    #0 0x41f844 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterFree+0x41f844)
+    #1 0x42d5be (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterFree+0x42d5be)
+    #2 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+previously allocated by thread T0 here:
+    #0 0x41f684 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterFree+0x41f684)
+    #1 0x42d56a (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterFree+0x42d56a)
+    #2 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
+Shadow bytes around the buggy address:
+  0x0c287fff9f70: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c287fff9f80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c287fff9f90: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c287fff9fa0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c287fff9fb0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+=>0x0c287fff9fc0: fa fa fa fa fa fa fa fa[fd]fd fd fd fd fd fd fd
+  0x0c287fff9fd0: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0c287fff9fe0: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0c287fff9ff0: fd fd fd fd fd fd fd fd fd fd fa fa fa fa fa fa
+  0x0c287fffa000: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c287fffa010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:     fa
+  Heap right redzone:    fb
+  Freed heap region:     fd
+  Stack left redzone:    f1
+  Stack mid redzone:     f2
+  Stack right redzone:   f3
+  Stack partial redzone: f4
+  Stack after return:    f5
+  Stack use after scope: f8
+  Global redzone:        f9
+  Global init order:     f6
+  Poisoned by user:      f7
+  ASan internal:         fe
+==28293==ABORTING
