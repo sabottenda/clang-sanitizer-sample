@@ -1,15 +1,14 @@
 =================================================================
-==28295==ERROR: AddressSanitizer: stack-use-after-return on address 0x2aaaadbdf260 at pc 0x42dcf3 bp 0x7fff4ef4f9d0 sp 0x7fff4ef4f9c8
-READ of size 4 at 0x2aaaadbdf260 thread T0
-    #0 0x42dcf2 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterReturn+0x42dcf2)
+==29851==ERROR: AddressSanitizer: stack-use-after-return on address 0x2aaaadbdf220 at pc 0x42db98 bp 0x7fffc060e930 sp 0x7fffc060e928
+READ of size 4 at 0x2aaaadbdf220 thread T0
+    #0 0x42db97 (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterReturn+0x42db97)
     #1 0x2aaaab530ea4 (/lib/x86_64-linux-gnu/libc-2.17.so+0x21ea4)
     #2 0x42d38c (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterReturn+0x42d38c)
-Address 0x2aaaadbdf260 is located in stack of thread T0 at offset 96 in frame
-    #0 0x42d6ff (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterReturn+0x42d6ff)
-  This frame has 3 object(s):
-    [32, 33) 'f.addr'
-    [96, 100) 'a'
-    [160, 164) 'cleanup.dest.slot'
+Address 0x2aaaadbdf220 is located in stack of thread T0 at offset 32 in frame
+    #0 0x42d68f (/home/sabo/clang-sanitizer-sample/AddressSanitizer/UseAfterReturn+0x42d68f)
+  This frame has 2 object(s):
+    [32, 36) 'a'
+    [96, 100) 'cleanup.dest.slot'
 HINT: this may be a false positive if your program uses some custom stack unwind mechanism or swapcontext
       (longjmp and C++ exceptions *are* supported)
 Shadow bytes around the buggy address:
@@ -18,8 +17,8 @@ Shadow bytes around the buggy address:
   0x0555d5b73e10: f2 f2 f2 f2 00 f4 f4 f4 f2 f2 f2 f2 00 f4 f4 f4
   0x0555d5b73e20: f2 f2 f2 f2 00 f4 f4 f4 f2 f2 f2 f2 04 f4 f4 f4
   0x0555d5b73e30: f3 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
-=>0x0555d5b73e40: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5[f5]f5 f5 f5
-  0x0555d5b73e50: f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 00 00 00 00
+=>0x0555d5b73e40: f5 f5 f5 f5[f5]f5 f5 f5 f5 f5 f5 f5 f5 f5 f5 f5
+  0x0555d5b73e50: f5 f5 f5 f5 00 00 00 00 00 00 00 00 00 00 00 00
   0x0555d5b73e60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
   0x0555d5b73e70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
   0x0555d5b73e80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
@@ -40,4 +39,4 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   Global init order:     f6
   Poisoned by user:      f7
   ASan internal:         fe
-==28295==ABORTING
+==29851==ABORTING

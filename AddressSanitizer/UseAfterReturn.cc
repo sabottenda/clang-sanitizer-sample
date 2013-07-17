@@ -3,20 +3,20 @@
 #include <cstdint>
 
 // not detected
-int *IntegerFactoryAlloca(bool f) {
+int *IntegerFactoryAlloca() {
   int *a = (int *)alloca(sizeof(int) * 1024);
   *a = 0xdeadbeef;
   return a;
 }
 
-intptr_t IntegerFactory(bool f) {
+intptr_t IntegerFactory() {
   int a;
   a = 0xdeadbeef;
   return (intptr_t)&a;
 }
 
 int main(int argc, char **argv) {
-  intptr_t p = IntegerFactory(argc);
+  intptr_t p = IntegerFactory();
   int *a = (int *)p;
 
   printf("%08x\n", *a);
